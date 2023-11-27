@@ -5,7 +5,7 @@ from src.utils import clean_data, visualize_network
 data_loader = SlackDataLoader()
 
 # Load data from a Slack channel
-slack_data = data_loader.get_users("path/to/slack_channel_data")
+slack_data = data_loader.get_channels("./data/channels.json")
 # Clean the loaded data
 cleaned_data = clean_data(slack_data)
 
