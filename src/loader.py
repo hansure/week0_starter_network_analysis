@@ -104,20 +104,18 @@ class SlackDataLoader:
 
         return df['msg_content'].map(lambda x: re.findall(r'@U\w+', x))
 
-    def get_top_20_user(data, channel='Random'):
+    def get_top_20_user(data = '../data', channel='Random'):
         """get user with the highest number of message sent to any channel"""
+        print("Data:", data.users[0]['real_name'])
 
-        # data.name.value_counts()[:20].plot.bar(figsize=(15, 7.5))
-        name_counts = pd.Series(data.name).value_counts()[:20]
-        real_name_counts.plot.bar(figsize=(15, 7.5))
-        plt.title(f'Top 20 Message Senders in #{channel} channels', size=15, fontweight='bold')
-        plt.xlabel("Sender Name", size=18); plt.ylabel("Frequency", size=14);
+        pd.Series(list(data.users[0]['real_name'])).value_counts()[:20].plot.bar(figsize=(15, 7.5))
+        plt.title(f'Top 20 Message reals in #{channel} channels', size=15, fontweight='bold')
+        plt.xlabel("real Name", size=18); plt.ylabel("Frequency", size=14);
         plt.xticks(size=12); plt.yticks(size=12);
         plt.show()
 
-        real_name_counts = pd.Series(data.name).value_counts()[:20]
-        name_counts.plot.bar(figsize=(15, 7.5))
-        plt.title(f'Bottom 10 Message Senders in #{channel} channels', size=15, fontweight='bold')
+        pd.Series(list(data.users[0]['real_name'])).value_counts()[-10:].plot.bar(figsize=(15, 7.5))
+        plt.title(f'Bottom 10 Message reals in #{channel} channels', size=15, fontweight='bold')
         plt.xlabel("Sender Name", size=18); plt.ylabel("Frequency", size=14);
         plt.xticks(size=12); plt.yticks(size=12);
         plt.show()
@@ -126,8 +124,6 @@ class SlackDataLoader:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Export Slack history')
-
-    
     parser.add_argument('--zip', help="Name of a zip file to import")
     args = parser.parse_args()
 

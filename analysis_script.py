@@ -17,8 +17,8 @@ def main():
     data_loader = SlackDataLoader(path='./data')
     # Load data from a Slack channel
     slack_data = data_loader.get_users()
-    # print(slack_data)
-    top_10_user = data_loader.get_top_20_user(slack_data)
+    df = pd.DataFrame(slack_data)
+    top_10_user = data_loader.get_top_20_user(df)
     print(top_10_user)
     # Clean the loaded data
     # cleaned_data = clean_data(slack_data)
